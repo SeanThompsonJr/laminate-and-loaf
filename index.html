@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Laminate &amp; Loaf · Pastry shop, Jacksonville (design concept)</title>
+<meta name="description" content="Design concept for a made-up Jacksonville pastry shop: holiday menu, hours and online ordering for pickup or delivery. Sample data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="styles.css?v=20261120g">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%23F5C842%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-size=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 fill=%27%2314323A%27%3EL%26amp;L%3C/text%3E%3C/svg%3E">
+<style>
+/* ---------- hero ---------- */
+.hero{background:var(--paper);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0 0 auto 0;height:14px;background:repeating-linear-gradient(90deg,var(--box) 0 28px,#fff 28px 56px)}
+.hero .col{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;padding-block:64px 56px}
+.hero h1{font-size:clamp(2.5rem,5.4vw,4.4rem);letter-spacing:-.01em}
+.hero .sub{margin-top:20px;font-size:1.15rem;color:var(--ink-soft);max-width:36ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.stage-wrap{display:flex;flex-direction:column;gap:12px;min-width:0}
+.hero-fig{aspect-ratio:5/4}
+.fig-cap{font-size:.92rem;color:var(--ink-soft)}
+/* ---------- quick answers ---------- */
+.answers .col{display:grid;grid-template-columns:repeat(4,1fr)}
+.answer{padding:26px 22px 26px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px;min-width:0}
+.answer + .answer{padding-left:22px}
+.answer:last-child{border-right:0}
+.answer h2{font-family:var(--sans);font-weight:600;font-size:.9rem;color:var(--ink-soft)}
+.answer p{font-family:var(--serif);font-size:1.25rem;line-height:1.25}
+.answer small{font-size:.86rem;color:var(--ink-soft)}
+
+section.block{padding-block:84px}
+.head{display:flex;flex-direction:column;gap:12px;max-width:640px;margin-bottom:36px}
+.head h2{font-size:clamp(2rem,4vw,3rem)}
+.head p{color:var(--ink-soft);font-size:1.08rem}
+.head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:36px}
+.head-row .head{margin-bottom:0}
+
+/* ---------- favorites ---------- */
+.favs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.fav{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow .2s var(--ease-out),transform .2s var(--ease-out)}
+.fav:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.fav .art{aspect-ratio:1/1}
+.fav .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.fav .name{font-weight:700}
+.fav .desc{color:var(--ink-soft);font-size:.92rem}
+.fav .foot{margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:center}
+.fav .price{font-family:var(--serif);font-size:1.2rem}
+.fav .go{font-weight:600;color:var(--cta)}
+
+/* ---------- how ordering works ---------- */
+.how{background:var(--paper);border-block:1px solid var(--line)}
+.how ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:h}
+.how li{counter-increment:h;display:flex;flex-direction:column;gap:8px;padding-top:18px;border-top:3px solid var(--butter)}
+.how li .figure{order:-2;margin-bottom:6px;width:100%;max-width:420px}
+.how li .legend{order:-1}
+.how li::before{content:counter(h);font-family:var(--serif);font-size:2rem;line-height:1;color:var(--crust)}
+.how li b{font-size:1.1rem}
+.how li span{color:var(--ink-soft)}
+
+/* ---------- FAQ: each box opens on its own ---------- */
+/* two independent columns: opening an answer only pushes the questions below it, never the column beside it */
+.faq{display:flex;gap:28px;align-items:flex-start}
+.faq-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:12px}
+details{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:0 20px}
+details[open]{border-color:var(--box)}
+summary{cursor:pointer;font-weight:600;padding:18px 0;min-height:44px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--serif);font-size:1.4rem;line-height:1;color:var(--box);flex:0 0 auto}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 18px;color:var(--ink-soft)}
+
+/* ---------- visit + map ---------- */
+#visit .col{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start}
+.hours{width:100%;border-collapse:collapse;margin-top:8px;font-variant-numeric:tabular-nums}
+.hours td{padding:9px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right}
+.hours tr.today td{font-weight:700}
+.contact{display:flex;flex-direction:column;gap:6px;margin-top:24px}
+.contact .big{font-family:var(--serif);font-size:1.6rem}
+.hint{font-size:.85rem;color:var(--ink-soft)}
+.mapbox{border-radius:var(--r-lg);border:1px solid #DADCE0;aspect-ratio:16/11;background:#F1F3F4;font-family:Roboto,Arial,sans-serif;box-shadow:var(--shadow)}
+.mapbox > svg{width:100%;height:100%;transition:transform .3s var(--ease-out);transform-origin:62% 52%}
+.mapbox .wm{left:auto;right:10px;bottom:auto;top:10px}
+.place{position:absolute;z-index:4;left:12px;top:12px;width:min(270px,calc(100% - 24px));background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px rgba(60,64,67,.15);padding:14px 14px 12px;display:flex;flex-direction:column;gap:3px;font-size:.86rem;color:#3C4043}
+.place b{font-size:1.02rem;color:#202124;font-weight:500}
+.place .open{color:#188038;font-weight:500}
+.place .acts{display:flex;gap:8px;margin-top:10px}
+.place .acts button{display:inline-flex;align-items:center;gap:6px;min-height:36px;border-radius:999px;padding:6px 14px;font:500 .84rem Roboto,Arial,sans-serif;border:1px solid #DADCE0;background:#fff;color:#1A73E8}
+.place .acts button.primary{background:#1A73E8;border-color:#1A73E8;color:#fff}
+.place .acts svg{width:16px;height:16px}
+.zoom{position:absolute;z-index:4;right:12px;bottom:12px;display:flex;flex-direction:column;background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(60,64,67,.3);overflow:hidden}
+.zoom button{width:44px;height:44px;border:0;background:#fff;font-size:1.4rem;color:#5F6368;line-height:1}
+.zoom button + button{border-top:1px solid #E8EAED}
+.zoom button:hover{background:#F8F9FA}
+.mapnote{position:absolute;z-index:4;left:12px;bottom:12px;background:rgba(32,33,36,.86);color:#fff;font-size:.78rem;padding:6px 10px;border-radius:6px;max-width:calc(100% - 90px)}
+.toast{position:absolute;z-index:5;left:50%;bottom:62px;transform:translateX(-50%);background:#202124;color:#fff;font-size:.86rem;padding:10px 14px;border-radius:8px;max-width:calc(100% - 32px);text-align:center}
+
+@media (max-width:900px){
+  .hero .col{grid-template-columns:1fr;gap:28px;padding-block:52px 40px}
+  .answers .col{grid-template-columns:1fr 1fr}
+  .answer{padding:20px 14px 20px 0;border-bottom:1px solid var(--line)}
+  .answer:nth-child(2){border-right:0}
+  .answer:nth-child(3){padding-left:0}
+  .answer:nth-child(n+3){border-bottom:0}
+  .favs{grid-template-columns:1fr 1fr}
+  .how ol,#visit .col{grid-template-columns:1fr}
+  .faq{flex-direction:column;gap:12px;align-items:stretch}
+  .faq-col{display:contents}
+}
+@media (max-width:560px){
+  header.top .btn{display:none}
+  section.block{padding-block:60px}
+  .favs{gap:12px}
+  .fav .body{padding:12px}
+  .fav .desc{display:none}
+  .mapbox{aspect-ratio:3/4}
+  .orderbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:var(--z-bar);gap:10px;padding:10px max(16px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
+  .orderbar .btn{flex:1}
+  footer{padding-bottom:110px}
+}
+.orderbar{display:none}
+@media (max-width:560px){.orderbar{display:flex}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="concept"><b>Design concept.</b> Laminate &amp; Loaf is a made-up bakery. Every price, date and detail is sample data.</div>
+
+<header class="top">
+  <div class="col">
+    <a class="mark" href="index.html">Laminate <span>&amp;</span> Loaf</a>
+    <div class="status" id="status"><i></i><span>Open 7am–2pm</span></div>
+    <nav class="links" aria-label="Main">
+      <a href="order.html">Menu</a><a href="#faq">Questions</a><a href="#visit">Visit</a>
+    </nav>
+    <a class="btn btn-cta" href="order.html">Order online</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="col">
+    <div>
+      <h1>Butter, folded by hand since four this morning.</h1>
+      <p class="sub">Croissants, pies and celebration cakes from a small Jacksonville pastry shop. Holiday orders are open: pick up at the counter or get them delivered, December 2 to 24.</p>
+      <div class="ctas">
+        <a class="btn btn-cta" href="order.html">Order holiday pies &amp; cakes</a>
+        <a class="btn btn-ghost" href="#favorites">See what's popular</a>
+      </div>
+    </div>
+    <div class="stage-wrap">
+      <div class="figure hero-fig" data-figure="bakeline" data-hint="Point at the line to slow it down" data-label="Illustration of a bakery line: dough is laid at the slab, baked in the oven, boxed, and sent out under the pickup frame (concept illustration)">
+        <span class="hl-read" aria-live="polite"></span><span class="wm">Concept only</span>
+      </div>
+      <p class="fig-cap">From the dough slab to the oven, the box and out the door. Point at a station to slow the line and see its name.</p>
+    </div>
+  </div>
+</section>
+
+<section class="answers" aria-label="Quick answers">
+  <div class="col">
+    <div class="answer"><h2>Hours</h2><p>Tue–Sun, 7am–2pm</p><small>Closed Mondays. Dec 24 until noon.</small></div>
+    <div class="answer"><h2>Gluten-free?</h2><p>Yes, two each day</p><small>Made in a kitchen that uses wheat.</small></div>
+    <div class="answer"><h2>Order notice</h2><p>3 days, cakes 7</p><small>Pies and boxes 3 days. Custom cakes 7.</small></div>
+    <div class="answer"><h2>Pickup or delivery</h2><p>Your choice</p><small>Delivery within 5 miles, $6 (sample).</small></div>
+  </div>
+</section>
+
+<section class="block" id="favorites">
+  <div class="col">
+    <div class="head-row">
+      <div class="head"><h2>Holiday favorites</h2><p>The four things people order most in December. Prices are samples.</p></div>
+      <a class="btn btn-ghost" href="order.html">See the full menu</a>
+    </div>
+    <div class="favs" id="favs"></div>
+  </div>
+</section>
+
+<section class="block how">
+  <div class="col">
+    <div class="head"><h2>How ordering works</h2></div>
+    <ol>
+      <li><div class="figure" data-figure="case" data-hint="Point at a tray" data-label="Illustration of a bakery display case with trays of pies, pastries and a cake (concept illustration)"><span class="hl-read" aria-live="polite"></span></div><b>Choose your treats</b><span>Pies, cakes and pastry boxes, with options like a cake message.</span></li>
+      <li><div class="figure" data-figure="calendar" data-hint="Point at a day" data-label="Illustration of a December calendar: open days stand up in green, booked-up days sit lower in coral with a cross, closed days lie flat in grey (concept illustration, sample availability)"><span class="hl-read" aria-live="polite"></span></div><div class="legend" aria-hidden="true"><span><i class="lg-open"></i>Open</span><span><i class="lg-booked"></i>Booked up</span><span><i class="lg-closed"></i>Closed</span><span>Sample days</span></div><b>Pick a day and a time</b><span>Only days we can bake for show up, so there's nothing to check.</span></li>
+      <li><div class="figure" data-figure="route" data-hint="Point at the bakery or the house" data-label="Illustration of a street corner: the bakery on one side, a house on the other, and a delivery scooter carrying a pastry box (concept illustration)"><span class="hl-read" aria-live="polite"></span></div><b>Pick up or get it delivered</b><span>Collect at the counter, or we bring it within 5 miles. Pay when it arrives.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="faq">
+  <div class="col">
+    <div class="head"><h2>What people ask us most</h2></div>
+    <div class="faq" id="faqList">
+      <div class="faq-col">
+        <details><summary>Do you take holiday orders?</summary><p>Yes. Pies, cakes and pastry boxes for pickup or delivery from December 2 to 24. Christmas Eve orders end at noon.</p></details>
+        <details><summary>How much notice do you need?</summary><p>Three days for pies and pastry boxes, seven days for custom cakes. The order page only shows days that work.</p></details>
+        <details><summary>Do you make custom cakes?</summary><p>Yes, from 6 inches up. Choose a flavor and add your message when you order, and we'll email you to confirm.</p></details>
+      </div>
+      <div class="faq-col">
+        <details><summary>Do you have gluten-free options?</summary><p>Yes: two gluten-free items every day, plus the flourless chocolate torte on the holiday menu. They're made in a kitchen that also uses wheat, so we can't promise there are no traces.</p></details>
+        <details><summary>Do you deliver?</summary><p>Within 5 miles of the shop, for a $6 fee (sample), in the same time windows as pickup.</p></details>
+        <details><summary>How do I pay?</summary><p>When you pick up or when your order arrives, by card or cash.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit">
+  <div class="col">
+    <div>
+      <div class="head" style="margin-bottom:20px"><h2>Come by the shop</h2><p>Sample address, Jacksonville, FL. Street parking out front.</p></div>
+      <table class="hours" aria-label="Opening hours"><tbody id="hours"></tbody></table>
+      <div class="contact">
+        <span class="hint">Call the shop</span>
+        <a class="big" href="tel:+19045550142">(904) 555-0142</a>
+        <span class="hint">555 numbers are reserved for examples; this one isn't real.</span>
+      </div>
+    </div>
+    <div class="art mapbox" id="map" role="img" aria-label="Concept map showing the shop's sample location next to a park and a river">
+      <svg viewBox="0 0 640 440" id="mapsvg" aria-hidden="true">
+        <rect width="640" height="440" fill="#F1F3F4"/>
+        <path d="M-20 360 C90 330 170 400 300 380 S 520 330 660 360 L660 460 L-20 460 Z" fill="#AAD3F5"/>
+        <path d="M60 40 h150 v110 h-150 z" fill="#C8E6C9"/>
+        <g fill="#E8EAED" stroke="#DADCE0" stroke-width="1">
+          <rect x="250" y="40" width="110" height="60" rx="3"/><rect x="250" y="122" width="50" height="58" rx="3"/><rect x="310" y="122" width="50" height="58" rx="3"/>
+          <rect x="400" y="40" width="90" height="140" rx="3"/><rect x="530" y="40" width="90" height="60" rx="3"/><rect x="530" y="122" width="90" height="58" rx="3"/>
+          <rect x="60" y="210" width="150" height="90" rx="3"/><rect x="250" y="210" width="110" height="90" rx="3"/><rect x="400" y="210" width="90" height="40" rx="3"/><rect x="530" y="210" width="90" height="90" rx="3"/>
+        </g>
+        <g stroke="#DADCE0" stroke-width="18" stroke-linecap="square"><path d="M0 195 H640"/><path d="M230 0 V340"/><path d="M380 0 V340"/><path d="M510 0 V340"/><path d="M0 110 H640"/></g>
+        <g stroke="#FFFFFF" stroke-width="14" stroke-linecap="square"><path d="M0 195 H640"/><path d="M230 0 V340"/><path d="M380 0 V340"/><path d="M510 0 V340"/><path d="M0 110 H640"/></g>
+        <path d="M0 322 C150 310 300 330 640 318" stroke="#F9D46A" stroke-width="22" fill="none"/>
+        <path d="M0 322 C150 310 300 330 640 318" stroke="#FDE293" stroke-width="17" fill="none"/>
+        <g font-family="Roboto, Arial, sans-serif" font-size="12" fill="#5F6368" style="paint-order:stroke" stroke="#fff" stroke-width="3">
+          <text x="20" y="191">Sample St</text>
+          <text x="560" y="106">Example Ave</text>
+          <text transform="translate(226 80) rotate(-90)">Market St</text>
+          <text transform="translate(506 300) rotate(-90)">Oak St</text>
+          <text x="40" y="318" font-weight="500">Riverside Pkwy</text>
+        </g>
+        <g font-family="Roboto, Arial, sans-serif" font-size="12">
+          <circle cx="135" cy="95" r="9" fill="#34A853"/><path d="M131 99 l4 -9 l4 9 z" fill="#fff"/>
+          <text x="104" y="124" fill="#188038" style="paint-order:stroke" stroke="#fff" stroke-width="3">Sample Park</text>
+          <text x="300" y="410" fill="#4A86C5" font-style="italic" font-size="13">River</text>
+          <circle cx="305" cy="150" r="8" fill="#7B8794"/><rect x="301" y="146" width="8" height="8" rx="1" fill="#fff"/>
+          <text x="262" y="174" fill="#5F6368" style="paint-order:stroke" stroke="#fff" stroke-width="3">Library</text>
+        </g>
+        <g transform="translate(445 186)">
+          <ellipse cx="0" cy="40" rx="8" ry="3" fill="#000" opacity=".2"/>
+          <path d="M0 40 C-6 26 -18 18 -18 4 A18 18 0 1 1 18 4 C18 18 6 26 0 40 Z" fill="#EA4335" stroke="#B31412" stroke-width="1.5"/>
+          <circle cx="0" cy="4" r="6.5" fill="#B31412"/>
+          <text x="24" y="10" font-family="Roboto, Arial, sans-serif" font-size="14" font-weight="700" fill="#C5221F" style="paint-order:stroke" stroke="#fff" stroke-width="4">Laminate &amp; Loaf</text>
+        </g>
+      </svg>
+      <div class="place">
+        <b>Laminate &amp; Loaf</b>
+        <span>Pastry shop</span>
+        <span><span class="open">Open</span> until 2 PM</span>
+        <span>Sample address, Jacksonville, FL</span>
+        <div class="acts">
+          <button type="button" class="primary" data-msg="On the real site, this opens turn-by-turn directions."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 11.3l-9-9a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5z"/></svg>Directions</button>
+          <button type="button" data-msg="On the real site, this calls the shop."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call</button>
+        </div>
+      </div>
+      <div class="zoom"><button type="button" id="zin" aria-label="Zoom in">+</button><button type="button" id="zout" aria-label="Zoom out">−</button></div>
+      <div class="mapnote">Concept map with a sample location, not a real address</div>
+      <div class="toast" id="toast" role="status" hidden></div>
+      <span class="wm">Concept only</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="col">
+    <span class="mark">Laminate &amp; Loaf</span>
+    <span>A website design concept by Sean Thompson. Laminate &amp; Loaf, its menu, prices, address and phone number are made up, and every photo is marked "Concept only".</span>
+    <span>Food photos: free <a href="https://unsplash.com/license">Unsplash License</a> photos by @kexum96, @tabithaturnervisuals, @henry_be and others, with full credits in img/CREDITS.md. Illustrations made with Hairline by Lucas Marques (MIT).</span>
+    <span>Want a site like this for your business? Send me a message on Instagram: DM "SITE".</span>
+  </div>
+</footer>
+
+<div class="orderbar">
+  <a class="btn btn-ghost" href="tel:+19045550142">Call</a>
+  <a class="btn btn-cta" href="order.html">Order online</a>
+</div>
+
+<script src="shared.js?v=20261120g"></script>
+<script src="hairline/kernel.js?v=20261120g"></script>
+<script src="hairline/host.js?v=20261120g"></script>
+<script src="hairline/figures.js?v=20261120g"></script>
+<script>LLHairline.mountAll();</script>
+<script>
+(function(){
+  LL.setStatus();
+
+  /* favorites */
+  var favs=document.getElementById("favs");
+  ["pecan","buche","xmasbox","torte"].forEach(function(id){
+    var i=LL.byId[id];
+    var a=document.createElement("a"); a.className="fav"; a.href="order.html?item="+id;
+    a.innerHTML=LL.artFrame(i.art,"",i.name)+'<div class="body"><span class="name">'+i.name+'</span><span class="desc">'+i.desc+'</span><div class="foot"><span class="price">$'+i.price+'</span><span class="go">Order</span></div></div>';
+    favs.appendChild(a);
+  });
+
+  /* FAQ: one answer open at a time, and each box only grows itself */
+  var list=document.querySelectorAll("#faqList details");
+  list.forEach(function(d){d.addEventListener("toggle",function(){if(d.open)list.forEach(function(o){if(o!==d)o.open=false;});});});
+
+  /* hours */
+  var HOURS=[["Monday","Closed"],["Tuesday","7am–2pm"],["Wednesday","7am–2pm"],["Thursday","7am–2pm"],["Friday","7am–2pm"],["Saturday","7am–2pm"],["Sunday","7am–2pm"]];
+  var today=(new Date().getDay()+6)%7, tb=document.getElementById("hours");
+  HOURS.forEach(function(h,i){var tr=document.createElement("tr"); if(i===today)tr.className="today"; tr.innerHTML="<td>"+h[0]+(i===today?" (today)":"")+"</td><td>"+h[1]+"</td>"; tb.appendChild(tr);});
+
+  /* map: zoom and concept toasts */
+  var msvg=document.getElementById("mapsvg"), z=1, toast=document.getElementById("toast"), tt;
+  function zoom(d){z=Math.min(2,Math.max(1,z+d)); msvg.style.transform="scale("+z+")";}
+  document.getElementById("zin").onclick=function(){zoom(.25);};
+  document.getElementById("zout").onclick=function(){zoom(-.25);};
+  document.querySelectorAll(".place button").forEach(function(b){b.onclick=function(){toast.textContent="Concept: "+b.getAttribute("data-msg");toast.hidden=false;clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true;},3500);};});
+
+})();
+</script>
+</body>
+</html>

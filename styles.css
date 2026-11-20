@@ -1,0 +1,126 @@
+/* Laminate & Loaf: shared styles for the home page and the order page.
+   Design system (ui-ux-pro-max, food/delivery): trust blue for structure, warm crust orange for the
+   one primary action per screen, butter yellow for the brand's memorable moments. Young Serif + Figtree. */
+:root{
+  --tile:#E7EFF3;      /* page ground, bakery-tile blue */
+  --paper:#FFFFFF;
+  --ink:#14323A;
+  --ink-soft:#4A646C;
+  --box:#2F6F8F;       /* pastry-box blue: structure, links, stripes */
+  --box-dark:#245A75;
+  --cta:#C2511A;       /* crust orange: the primary action */
+  --cta-dark:#A3420F;
+  --butter:#F5C842;
+  --dough:#F3DDAA;
+  --crust:#B5652A;
+  --line:#CFDDE3;
+  --ok:#2E7D4F;
+  --err:#B23A2B;
+  --serif:"Young Serif", Georgia, "Times New Roman", serif;
+  --sans:"Figtree", "Segoe UI", system-ui, sans-serif;
+  --r-sm:10px; --r-md:14px; --r-lg:20px;
+  --shadow:0 1px 2px rgba(20,50,58,.06),0 6px 20px rgba(20,50,58,.08);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --z-header:20; --z-bar:30; --z-sheet:40;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--tile);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+a{color:var(--box)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+button{cursor:pointer;touch-action:manipulation}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--box);outline-offset:3px;border-radius:6px}
+.col{max-width:1160px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
+.skip{position:absolute;left:-999px;top:8px;background:var(--paper);padding:10px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* concept banner */
+.concept{background:var(--ink);color:#DCE9EE;font-size:.84rem;text-align:center;padding:7px 16px}
+.concept b{color:var(--butter);font-weight:600}
+
+/* header */
+header.top{position:sticky;top:0;z-index:var(--z-header);background:rgba(255,255,255,.95);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+header.top .col{display:flex;align-items:center;gap:16px;min-height:68px}
+.mark{font-family:var(--serif);font-size:1.45rem;text-decoration:none;color:var(--ink);white-space:nowrap}
+.mark span{color:var(--crust)}
+.status{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink-soft);margin-right:auto}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--ok);flex:0 0 auto}
+.status.closed i{background:var(--err)}
+nav.links{display:flex;gap:22px}
+nav.links a{color:var(--ink);text-decoration:none;font-weight:500;font-size:.95rem;padding:10px 0}
+nav.links a:hover,nav.links a[aria-current="page"]{color:var(--box)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;min-height:46px;padding:12px 22px;font-weight:600;text-decoration:none;line-height:1.1;transition:background-color .2s var(--ease-out),transform .15s var(--ease-out)}
+.btn:active{transform:scale(.97)}
+.btn-cta{background:var(--cta);color:#fff}
+.btn-cta:hover{background:var(--cta-dark)}
+.btn-blue{background:var(--box);color:#fff}
+.btn-blue:hover{background:var(--box-dark)}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-ghost:hover{background:var(--paper)}
+.btn svg{width:20px;height:20px;flex:0 0 auto}
+
+/* artwork frames, every one carries the concept watermark */
+.art{display:block;position:relative;overflow:hidden;isolation:isolate}
+.art > svg{width:100%;height:100%}
+.art > img{width:100%;height:100%;object-fit:cover;display:block}
+.art.photo::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='130'%3E%3Ctext x='14' y='74' transform='rotate(-22 120 65)' font-family='Arial,Helvetica,sans-serif' font-size='16' font-weight='700' letter-spacing='3' fill='%23ffffff' fill-opacity='0.42' stroke='%2314323A' stroke-opacity='0.18' stroke-width='0.6'%3ECONCEPT ONLY%3C/text%3E%3C/svg%3E");background-size:240px 130px}
+/* Hairline figures: the site's palette on the engine's own variables */
+/* Hairline figures: the site's palette on the engine's own variables. The figures set no colour; each solid
+   carries a kind class (k-*) and a top face (.face), and the page fills them: sides darker, tops lighter. */
+[data-hairline]{--hairline-plate:#ffffff;--hairline-hi:#0F2A31;--hairline-edge:#55737F;--hairline-mid:#7E98A3;--hairline-lo:rgba(255,255,255,.6);--hairline-stroke:1.1}
+[data-hairline] svg .k-slab>.sil{fill:#EBCB8B}[data-hairline] svg .k-slab>.face{fill:#F6E2B3}[data-hairline] svg .k-belt>.sil{fill:#3C4C54}[data-hairline] svg .k-belt>.face{fill:#4E6069}[data-hairline] svg .k-oven>.sil{fill:#2F6F8F}[data-hairline] svg .k-oven>.face{fill:#4A8AA8}[data-hairline] svg .k-flue>.sil{fill:#24566E}[data-hairline] svg .k-flue>.face{fill:#3B7896}[data-hairline] svg .k-flatbox>.sil{fill:#E2EAEE}[data-hairline] svg .k-flatbox>.face{fill:#FFFFFF}[data-hairline] svg .k-wood>.sil{fill:#B5652A}[data-hairline] svg .k-wood>.face{fill:#CF8547}[data-hairline] svg .k-dough>.sil{fill:#EED6A3}[data-hairline] svg .k-dough>.face{fill:#F7E7C4}[data-hairline] svg .k-baked>.sil{fill:#C77A2E}[data-hairline] svg .k-baked>.face{fill:#E2A04F}[data-hairline] svg .k-pbox>.sil{fill:#B23A3A}[data-hairline] svg .k-pbox>.face{fill:#CF4B48}[data-hairline] svg .k-panel>.sil{fill:#D5E5EC}[data-hairline] svg .k-panel>.face{fill:#EAF3F6}[data-hairline] svg .k-counter>.sil{fill:#EBDDC6}[data-hairline] svg .k-counter>.face{fill:#F8F0E2}[data-hairline] svg .k-tray>.sil{fill:#B4C2C8}[data-hairline] svg .k-tray>.face{fill:#DCE4E8}[data-hairline] svg .k-pie>.sil{fill:#C9843A}[data-hairline] svg .k-pie>.face{fill:#9A4E1E}[data-hairline] svg .k-pastry>.sil{fill:#C77A2E}[data-hairline] svg .k-pastry>.face{fill:#E5A452}[data-hairline] svg .k-cake>.sil{fill:#FBEFF3}[data-hairline] svg .k-cake>.face{fill:#F2A7C0}[data-hairline] svg .k-peg-red>.sil{fill:#A93226}[data-hairline] svg .k-peg-red>.face{fill:#D3473A}[data-hairline] svg .k-peg-green>.sil{fill:#24704A}[data-hairline] svg .k-peg-green>.face{fill:#3C9466}[data-hairline] svg .k-peg-cream>.sil{fill:#E3D2AE}[data-hairline] svg .k-peg-cream>.face{fill:#FBF1DC}[data-hairline] svg .k-peg-off>.sil{fill:#C9D2D6}[data-hairline] svg .k-peg-off>.face{fill:#DDE4E7}[data-hairline] svg .k-grass>.sil{fill:#5E9B5A}[data-hairline] svg .k-grass>.face{fill:#8BC27F}[data-hairline] svg .k-road>.sil{fill:#3C4C54}[data-hairline] svg .k-road>.face{fill:#56676F}[data-hairline] svg .k-shop>.sil{fill:#EEDCBE}[data-hairline] svg .k-shop>.face{fill:#FBF1DE}[data-hairline] svg .k-awning>.sil{fill:#2F6F8F}[data-hairline] svg .k-awning>.face{fill:#3F86A8}[data-hairline] svg .k-house>.sil{fill:#EBCB7A}[data-hairline] svg .k-house>.face{fill:#F5DFA6}[data-hairline] svg .k-roof>.sil{fill:#B5523A}[data-hairline] svg .k-roof>.face{fill:#B5523A}[data-hairline] svg .k-scooter>.sil{fill:#C2511A}[data-hairline] svg .k-scooter>.face{fill:#DD6A2E}[data-hairline] svg .k-seat>.sil{fill:#14323A}[data-hairline] svg .k-seat>.face{fill:#2A4A54}[data-hairline] svg .k-trunk>.sil{fill:#7A4B2A}[data-hairline] svg .k-trunk>.face{fill:#8E5A33}[data-hairline] svg .k-tree>.sil{fill:#3F8A4F}[data-hairline] svg .k-tree>.face{fill:#5DAA68}
+[data-hairline] svg .win{fill:#F5C04A}[data-hairline] svg .mouth{fill:#1E2F36}[data-hairline] svg .door{fill:#2F6F8F}
+[data-hairline] svg .tie{stroke:#2F6F8F}[data-hairline] svg .stripe{stroke:#FFFFFF}[data-hairline] svg .wheel{fill:#1F2A2E}
+[data-hairline] svg .k-slab>.nf.lo{stroke:#E0A92E}[data-hairline="route"] svg .dash{stroke:#F5E6B8}
+[data-hairline] svg .dot.off{fill:#F5C04A}
+[data-hairline] svg .k-calbase>.sil{fill:#E9D6B8}[data-hairline] svg .k-calbase>.face{fill:#FBF4E6}
+[data-hairline] svg .k-calhead>.sil{fill:#245A75}[data-hairline] svg .k-calhead>.face{fill:#2F6F8F}
+[data-hairline] svg .k-ring>.sil{fill:#6F7F86}[data-hairline] svg .k-ring>.face{fill:#A9B6BB}
+[data-hairline] svg .k-day-open>.sil{fill:#3E9A63}[data-hairline] svg .k-day-open>.face{fill:#6CC08B}
+[data-hairline] svg .k-day-booked>.sil{fill:#C25A43}[data-hairline] svg .k-day-booked>.face{fill:#E8907A}
+[data-hairline] svg .k-day-closed>.sil{fill:#D3DBDE}[data-hairline] svg .k-day-closed>.face{fill:#DFE6E9}
+[data-hairline] svg .k-day-out>.sil{fill:#E2E7E9}[data-hairline] svg .k-day-out>.face{fill:#EEF2F3}
+[data-hairline] svg .cross{stroke:#FFFFFF}
+[data-hairline] svg .ribbon{fill:#F5C842}[data-hairline] svg .bow{fill:#F5C842}[data-hairline] svg .lidline{stroke:#8E2A2A}[data-hairline] svg .tag{fill:#FFFDF7}[data-hairline] svg .mono{stroke:#8E2A2A}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.85rem;color:var(--ink-soft);margin:-2px 0 4px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.legend .lg-open{background:#3E9A63}.legend .lg-booked{background:#C25A43}.legend .lg-closed{background:#D3DBDE;box-shadow:inset 0 0 0 1px #B9C4C9}
+
+.figure{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.figure .hl-read{position:absolute;z-index:3;top:12px;right:14px;font-size:.82rem;font-weight:600;color:var(--ink-soft);pointer-events:none}
+.figure .wm{position:absolute;z-index:3;left:12px;bottom:12px;background:rgba(20,50,58,.82);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:999px;pointer-events:none}
+.art::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120'%3E%3Ctext x='10' y='70' transform='rotate(-22 110 60)' font-family='Arial,Helvetica,sans-serif' font-size='15' font-weight='700' letter-spacing='2' fill='%2314323A' fill-opacity='0.13'%3ECONCEPT ONLY%3C/text%3E%3C/svg%3E");
+  background-size:220px 120px}
+.art .wm{position:absolute;z-index:3;left:10px;bottom:10px;background:rgba(20,50,58,.82);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:999px;pointer-events:none}
+.art.wm-top .wm{bottom:auto;top:10px}
+
+/* tags */
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:.76rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--tile);color:var(--ink)}
+.tag.gf{background:#DDF0E3;color:#1F5C38}
+.tag.nut{background:#FBE9D9;color:#7A3D12}
+.tag.lead{background:#FFF3C4;color:#6B5200}
+
+footer{background:var(--ink);color:#C9DCE2;padding-block:44px}
+footer .col{display:flex;flex-direction:column;gap:10px;font-size:.92rem}
+footer .mark{color:#fff}
+footer a{color:var(--butter)}
+
+@media (max-width:900px){nav.links{display:none}}
+@media (max-width:560px){
+  body{font-size:16px}
+  header.top .col{min-height:60px;gap:10px}
+  .mark{font-size:1.2rem}
+  .status{font-size:.8rem}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}

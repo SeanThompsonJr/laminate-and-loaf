@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Order online · Laminate &amp; Loaf (design concept)</title>
+<meta name="description" content="Design concept: order holiday pies, cakes and pastry boxes from a made-up Jacksonville pastry shop for pickup or delivery. Sample data, nothing is sent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css?v=20261120g">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%23F5C842%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-size=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 fill=%27%2314323A%27%3EL%26amp;L%3C/text%3E%3C/svg%3E">
+<style>
+body{background:#F6F8F9}
+.cartbtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:999px;border:0;background:var(--ink);color:#fff;font-weight:600}
+.cartbtn svg{width:20px;height:20px}
+.cartbtn .n{background:var(--butter);color:var(--ink);border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:.8rem;padding:0 6px}
+
+/* store header */
+.store{background:var(--paper);border-bottom:1px solid var(--line)}
+.banner{aspect-ratio:4/1;max-height:260px;width:100%}
+.store .col{position:relative;padding-block:0 22px}
+.logo{position:absolute;top:-44px;left:max(20px,env(safe-area-inset-left,0px));width:88px;height:88px;border-radius:50%;background:var(--butter);border:4px solid #fff;box-shadow:var(--shadow);display:grid;place-items:center;font-family:var(--serif);font-size:1.5rem;color:var(--ink)}
+.store-info{padding-top:56px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.store h1{font-size:clamp(1.9rem,4vw,2.6rem)}
+/* store facts: plain information, not controls (no fills, no pill shapes) */
+.facts{display:flex;flex-wrap:wrap;gap:10px 0;margin:12px 0 0}
+.facts div{display:flex;flex-direction:column;gap:1px;padding:0 18px;border-left:1px solid var(--line)}
+.facts div:first-child{padding-left:0;border-left:0}
+.facts dt{font-size:.8rem;color:var(--ink-soft)}
+.facts dd{margin:0;font-size:.95rem;font-weight:600;color:var(--ink)}
+/* while a sheet is open, the page behind it does not scroll */
+html.locked,html:has(dialog[open]){overflow:hidden}
+.sheet .scroll{overscroll-behavior:contain}
+.seg{display:inline-flex;background:var(--tile);border-radius:999px;padding:4px;gap:4px}
+.seg button{border:0;background:transparent;border-radius:999px;min-height:40px;padding:8px 18px;font-weight:600;color:var(--ink-soft);transition:background-color .2s var(--ease-out),color .2s var(--ease-out)}
+.seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(20,50,58,.15)}
+.fnote{font-size:.86rem;color:var(--ink-soft);margin-top:8px}
+
+/* menu layout */
+.shop{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:32px;align-items:start;padding-block:24px 80px}
+.tabsbar{position:sticky;top:68px;z-index:15;background:#F6F8F9;padding-block:12px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:0 0 auto;text-decoration:none;color:var(--ink);font-weight:600;font-size:.95rem;padding:10px 14px;border-radius:999px;min-height:44px;display:inline-flex;align-items:center}
+.tabs a.on{background:var(--ink);color:#fff}
+.search{position:relative;flex:0 0 240px}
+.search input{width:100%;min-height:44px;border:1.5px solid var(--line);border-radius:999px;padding:8px 14px 8px 40px;background:#fff}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--ink-soft)}
+.msec{padding-top:28px;scroll-margin-top:150px}
+.msec h2{font-size:1.6rem;margin-bottom:4px}
+.msec .note{color:var(--ink-soft);font-size:.92rem;margin-bottom:14px}
+.items{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.item{display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:14px;text-align:left;width:100%;transition:box-shadow .2s var(--ease-out),border-color .2s var(--ease-out)}
+.item:hover{box-shadow:var(--shadow);border-color:#B9CCD4}
+.item .t{display:flex;flex-direction:column;gap:5px;min-width:0}
+.item .nm{font-weight:700;font-size:1.02rem}
+.item .ds{color:var(--ink-soft);font-size:.9rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item .pr{font-variant-numeric:tabular-nums;font-weight:600;margin-top:auto}
+.item .pic{position:relative}
+.item .art{aspect-ratio:1/1;border-radius:12px}
+.item .art .wm{font-size:.62rem;left:6px;bottom:6px;padding:3px 7px}
+.item .plus{position:absolute;right:-6px;bottom:-6px;z-index:5;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(20,50,58,.25);display:grid;place-items:center;color:var(--ink)}
+.item .plus svg{width:22px;height:22px}
+.item .qtyb{position:absolute;right:-6px;bottom:-6px;z-index:5;min-width:44px;height:44px;border-radius:999px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;padding:0 10px}
+.noresults{background:var(--paper);border:1px dashed var(--line);border-radius:var(--r-md);padding:24px;color:var(--ink-soft);margin-top:24px}
+
+/* cart panel */
+.cart{position:sticky;top:92px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;display:flex;flex-direction:column;gap:14px}
+.cart h2{font-size:1.4rem}
+.cart .mode{font-size:.9rem;color:var(--ink-soft)}
+.clines{display:flex;flex-direction:column;gap:12px;max-height:46vh;overflow:auto}
+.cline{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.cline .nm{font-weight:600}
+.cline .opt{font-size:.85rem;color:var(--ink-soft);grid-column:1/2}
+.cline .lp{text-align:right;font-variant-numeric:tabular-nums}
+.stepper{display:inline-flex;align-items:center;gap:2px;border:1.5px solid var(--line);border-radius:999px;grid-column:1/-1;justify-self:start}
+.stepper button{width:40px;height:40px;border:0;background:none;border-radius:50%;font-size:1.1rem;font-weight:700;color:var(--ink);display:grid;place-items:center}
+.stepper button:hover{background:var(--tile)}
+.stepper output{min-width:24px;text-align:center;font-variant-numeric:tabular-nums;font-weight:600}
+.stepper svg{width:16px;height:16px}
+.totals{display:grid;grid-template-columns:1fr auto;gap:6px;font-variant-numeric:tabular-nums;font-size:.95rem}
+.totals .grand{font-weight:700;font-size:1.1rem;padding-top:8px;border-top:1px solid var(--line)}
+.cart .btn{width:100%}
+.cart .btn[disabled]{opacity:.45;cursor:not-allowed}
+.empty{display:flex;flex-direction:column;gap:6px;align-items:flex-start;color:var(--ink-soft);font-size:.95rem;padding:6px 0}
+.empty b{color:var(--ink);font-size:1rem}
+
+.viewbar{display:none}
+
+/* item sheet */
+dialog{border:0;padding:0;border-radius:var(--r-lg);width:min(560px,calc(100% - 32px));max-height:calc(100dvh - 48px);background:var(--paper);color:var(--ink);box-shadow:0 20px 60px rgba(20,50,58,.35);overflow:hidden}
+dialog::backdrop{background:rgba(20,50,58,.5)}
+dialog[open]{animation:sheetIn .25s var(--ease-out)}
+@keyframes sheetIn{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.sheet{display:flex;flex-direction:column;max-height:calc(100dvh - 48px)}
+.sheet .scroll{overflow:auto;padding-bottom:8px}
+.sheet .art{aspect-ratio:16/9}
+.sheet .x{position:absolute;z-index:6;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;box-shadow:0 2px 8px rgba(20,50,58,.25);display:grid;place-items:center}
+.sheet .x svg{width:20px;height:20px}
+.sheet .in{padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+.sheet h2{font-size:1.7rem}
+.sheet .ds{color:var(--ink-soft)}
+.opts{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.opts legend{font-weight:700;margin-bottom:4px;padding:0}
+.opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;min-height:48px;cursor:pointer}
+.opt:has(input:checked){border-color:var(--box);background:#F1F7FA}
+.opt input{width:20px;height:20px;accent-color:var(--box)}
+.opt span{flex:1}
+.opt small{color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-weight:600;font-size:.92rem}
+.field input,.field textarea,.field select{border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;min-height:46px;background:#fff;width:100%}
+.field input:focus,.field textarea:focus{border-color:var(--box);outline:none;box-shadow:0 0 0 3px rgba(47,111,143,.18)}
+.field .err{color:var(--err);font-size:.86rem;font-weight:600}
+.field.bad input{border-color:var(--err)}
+.sheet .foot{display:flex;gap:12px;align-items:center;padding:14px 22px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--paper)}
+.sheet .foot .btn{flex:1;justify-content:space-between}
+
+/* checkout */
+#checkout,#confirmed{padding-block:28px 80px}
+.co{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:32px;align-items:start}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-weight:600;text-decoration:none;min-height:44px}
+.back svg{width:18px;height:18px}
+.co h1{font-size:clamp(1.9rem,4vw,2.6rem);margin:6px 0 20px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
+.card h2{font-size:1.3rem;display:flex;align-items:center;gap:10px}
+.card h2 .num{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font:700 .9rem var(--sans);display:inline-grid;place-items:center}
+.daychips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.daychips button,.slots button{flex:0 0 auto;border:1.5px solid var(--line);background:#fff;border-radius:12px;min-height:56px;padding:8px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2;font-weight:600}
+.daychips button small{font-weight:500;color:var(--ink-soft);font-size:.78rem}
+.daychips button[aria-pressed="true"],.slots button[aria-pressed="true"]{border-color:var(--box);background:#F1F7FA;box-shadow:inset 0 0 0 1px var(--box)}
+.slots{display:flex;gap:8px;flex-wrap:wrap}
+.slots button{min-height:46px;flex-direction:row}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid2 .full{grid-column:1/-1}
+.shopaddr{display:flex;gap:12px;align-items:flex-start;background:var(--tile);border-radius:12px;padding:14px}
+.shopaddr svg{width:22px;height:22px;color:var(--box);flex:0 0 auto;margin-top:2px}
+.pay{display:flex;gap:12px;align-items:flex-start;color:var(--ink-soft)}
+.pay svg{width:22px;height:22px;color:var(--ok);flex:0 0 auto}
+.errsum{background:#FCECE9;border:1.5px solid #E7B1A7;color:#7A2418;border-radius:12px;padding:12px 14px;font-weight:600}
+.spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* confirmation */
+.done{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.done .ok{width:64px;height:64px;border-radius:50%;background:var(--ok);display:grid;place-items:center}
+.done .ok svg{width:34px;height:34px;color:#fff}
+.done h1{font-size:clamp(2rem,4.4vw,2.8rem)}
+.track{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.track li{display:grid;grid-template-columns:32px 1fr;gap:12px;padding-bottom:18px;position:relative}
+.track li::before{content:"";position:absolute;left:15px;top:30px;bottom:0;width:2px;background:var(--line)}
+.track li:last-child::before{display:none}
+.track .dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--line);background:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem;color:var(--ink-soft)}
+.track li.now .dot{background:var(--ok);border-color:var(--ok);color:#fff}
+.track b{display:block}
+.track span{color:var(--ink-soft);font-size:.92rem}
+.concept-note{background:#FFF6D6;border:1.5px solid #EDD27A;border-radius:12px;padding:14px;font-size:.95rem}
+
+[hidden]{display:none!important}
+.credits{font-size:.82rem;color:var(--ink-soft);padding-block:0 120px}
+
+@media (max-width:1023px){
+  .shop,.co{grid-template-columns:1fr}
+  .shop > .cart{display:none}
+  .co .cart{position:static}
+  .viewbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:var(--z-bar);padding:10px max(16px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
+  .viewbar .btn{flex:1;justify-content:space-between}
+  body.hasbar{padding-bottom:84px}
+}
+@media (max-width:760px){
+  .items{grid-template-columns:1fr}
+  .tabsbar{flex-wrap:wrap;top:60px}
+  .search{flex:1 1 100%;order:-1}
+  .banner{aspect-ratio:2.4/1}
+  .grid2{grid-template-columns:1fr}
+  dialog{width:100%;max-width:100%;margin:auto 0 0;border-radius:var(--r-lg) var(--r-lg) 0 0;max-height:92dvh}
+  .sheet{max-height:92dvh}
+  dialog[open]{animation:sheetUp .28s var(--ease-out)}
+  @keyframes sheetUp{from{transform:translateY(40px);opacity:.6}}
+  .cartbtn .lbl{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="concept"><b>Design concept.</b> Laminate &amp; Loaf is a made-up bakery. Nothing you order here is sent or charged.</div>
+
+<header class="top">
+  <div class="col">
+    <a class="mark" href="index.html">Laminate <span>&amp;</span> Loaf</a>
+    <div class="status" id="status"><i></i><span>Open 7am–2pm</span></div>
+    <nav class="links" aria-label="Main">
+      <a href="order.html" aria-current="page">Menu</a><a href="index.html#faq">Questions</a><a href="index.html#visit">Visit</a>
+    </nav>
+    <button class="cartbtn" type="button" id="cartBtn" aria-label="Open your order"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span class="lbl">Your order</span><span class="n" id="cartN">0</span></button>
+  </div>
+</header>
+
+<main id="main">
+<!-- ============ MENU VIEW ============ -->
+<div id="menuView">
+  <section class="store">
+    <div class="art banner wm-top" role="img" aria-label="Tray of pastries (sample photo, concept only)" id="banner"></div>
+    <div class="col">
+      <div class="logo" aria-hidden="true">L&amp;L</div>
+      <div class="store-info">
+        <div>
+          <h1>Laminate &amp; Loaf</h1>
+          <dl class="facts" aria-label="Store information">
+            <div><dt>Hours</dt><dd>Tue–Sun, 7am–2pm</dd></div>
+            <div><dt>Holiday orders</dt><dd>Dec 2–24</dd></div>
+            <div><dt>Payment</dt><dd>When your order arrives</dd></div>
+          </dl>
+        </div>
+        <div>
+          <div class="seg" role="group" aria-label="Pickup or delivery">
+            <button type="button" data-mode="pickup" aria-pressed="true">Pickup</button>
+            <button type="button" data-mode="delivery" aria-pressed="false">Delivery</button>
+          </div>
+          <p class="fnote" id="modeNote">Pick up at the counter. Ready on the day and time you choose.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="col">
+    <div class="tabsbar">
+      <nav class="tabs" id="tabs" aria-label="Menu sections"></nav>
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><label class="sr" for="q">Search the menu</label><input id="q" type="search" placeholder="Search the menu" autocomplete="off"></div>
+    </div>
+    <div class="shop">
+      <div id="menuCol"></div>
+      <aside class="cart" id="cartPanel" aria-label="Your order"></aside>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CHECKOUT VIEW ============ -->
+<section id="checkout" hidden>
+  <div class="col">
+    <a class="back" href="#menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Back to the menu</a>
+    <h1 tabindex="-1" id="coTitle">Checkout</h1>
+    <div class="co">
+      <form id="coForm" novalidate>
+        <div class="errsum" id="errSum" role="alert" hidden></div>
+        <div class="card">
+          <h2><span class="num">1</span>Pickup or delivery</h2>
+          <div class="seg" role="group" aria-label="Pickup or delivery">
+            <button type="button" data-mode="pickup" aria-pressed="true">Pickup</button>
+            <button type="button" data-mode="delivery" aria-pressed="false">Delivery</button>
+          </div>
+          <div class="shopaddr" id="pickupBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>Laminate &amp; Loaf</b><br><span class="hint">Sample address, Jacksonville, FL. Collect at the counter.</span></div></div>
+          <div class="grid2" id="deliveryBox" hidden>
+            <div class="field full"><label for="street">Street address</label><input id="street" autocomplete="street-address"><span class="err" hidden></span></div>
+            <div class="field"><label for="apt">Apartment or unit (optional)</label><input id="apt" autocomplete="address-line2"></div>
+            <div class="field"><label for="zip">ZIP code</label><input id="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5"><span class="err" hidden></span></div>
+            <p class="hint full">We deliver within 5 miles of the shop for $6 (sample).</p>
+          </div>
+        </div>
+        <div class="card">
+          <h2><span class="num">2</span>When</h2>
+          <div class="field" id="dayField"><span style="font-weight:600;font-size:.92rem" id="dayLbl">Day</span><div class="daychips" id="days" role="group" aria-labelledby="dayLbl"></div><span class="hint" id="dayHint"></span><span class="err" hidden></span></div>
+          <div class="field" id="slotField"><span style="font-weight:600;font-size:.92rem" id="slotLbl">Time</span><div class="slots" id="slots" role="group" aria-labelledby="slotLbl"></div><span class="err" hidden></span></div>
+        </div>
+        <div class="card">
+          <h2><span class="num">3</span>Your details</h2>
+          <div class="grid2">
+            <div class="field"><label for="name">Name</label><input id="name" autocomplete="name"><span class="err" hidden></span></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" type="tel" autocomplete="tel"><span class="err" hidden></span></div>
+            <div class="field full"><label for="email">Email</label><input id="email" type="email" autocomplete="email"><span class="hint">Your confirmation goes here.</span><span class="err" hidden></span></div>
+            <div class="field full"><label for="notes">Notes and allergies (optional)</label><textarea id="notes" rows="3"></textarea></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2><span class="num">4</span>Payment</h2>
+          <div class="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Pay by card or cash when you pick up or when it arrives. Nothing is charged online.</span></div>
+        </div>
+      </form>
+      <aside class="cart" id="coSummary" aria-label="Order summary"></aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONFIRMATION VIEW ============ -->
+<section id="confirmed" hidden>
+  <div class="col">
+    <div class="done">
+      <div class="ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h1 tabindex="-1" id="doneTitle">Order received</h1>
+      <p class="concept-note"><b>Design concept:</b> no order was sent and nothing was charged. On the real site, the owner would get this order by email, and you would get a confirmation.</p>
+      <div class="card" id="doneCard"></div>
+      <a class="btn btn-cta" href="#menu" id="again" style="align-self:flex-start">Back to the menu</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="viewbar" id="viewbar" hidden><button class="btn btn-cta" type="button" id="viewBtn"><span>View your order</span><span id="viewTotal">$0</span></button></div>
+
+<p class="col credits">Food photos: free <a href="https://unsplash.com/license">Unsplash License</a> photos, credited in img/CREDITS.md. Every photo is a sample marked "Concept only".</p>
+
+<dialog id="itemDlg" aria-labelledby="dlgTitle"></dialog>
+<dialog id="cartDlg" aria-label="Your order"><div class="sheet"><button class="x" type="button" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><div class="scroll"><div class="in cart" id="cartSheet" style="border:0;position:static"></div></div></div></dialog>
+
+<script src="shared.js?v=20261120g"></script>
+<script>
+(function(){
+  LL.setStatus();
+  var MENU=LL.MENU, byId=LL.byId, cart=LL.loadCart(), mode="pickup", FEE=6;
+  try{mode=localStorage.getItem("ll-mode")||"pickup";}catch(e){}
+  var SLOTS=["7–9am","9–11am","11am–1pm","1–2pm"];
+  var pick={day:null,slot:null};
+  var $=function(id){return document.getElementById(id);};
+  var ICON={plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',minus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>',trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'};
+  function money(n){return "$"+n.toFixed(n%1?2:0);}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+  $("banner").innerHTML=LL.art("banner",true)+'<span class="wm">Concept only</span>'; $("banner").classList.add("photo");
+
+  /* ---------- menu ---------- */
+  var tabs=$("tabs"), menuCol=$("menuCol");
+  MENU.forEach(function(g){
+    var a=document.createElement("a"); a.href="#sec-"+g.id; a.textContent=g.group; a.dataset.sec=g.id; tabs.appendChild(a);
+    var s=document.createElement("section"); s.className="msec"; s.id="sec-"+g.id; s.setAttribute("aria-labelledby","h-"+g.id);
+    s.innerHTML='<h2 id="h-'+g.id+'">'+g.group+'</h2><p class="note">'+g.note+'</p><div class="items"></div>';
+    var wrap=s.querySelector(".items");
+    g.items.forEach(function(i){
+      var b=document.createElement("button"); b.type="button"; b.className="item"; b.dataset.id=i.id;
+      b.dataset.search=(i.name+" "+i.desc+" "+i.tags.map(function(t){return LL.TAGTEXT[t];}).join(" ")).toLowerCase();
+      var tags=i.tags.map(function(t){return '<span class="tag '+t+'">'+LL.TAGTEXT[t]+'</span>';}).join("");
+      b.innerHTML='<span class="t"><span class="nm">'+i.name+'</span><span class="ds">'+i.desc+'</span>'+(tags?'<span class="tags">'+tags+'</span>':'')+'<span class="pr">'+money(i.price)+'</span></span><span class="pic">'+LL.artFrame(i.art,"",i.name)+'<span class="plus" aria-hidden="true">'+ICON.plus+'</span></span>';
+      b.setAttribute("aria-label",i.name+", "+money(i.price)+". Open to add to your order");
+      b.onclick=function(){openItem(i.id);};
+      wrap.appendChild(b);
+    });
+    menuCol.appendChild(s);
+  });
+  var nores=document.createElement("p"); nores.className="noresults"; nores.hidden=true; menuCol.appendChild(nores);
+
+  /* active tab follows the scroll */
+  var secs=document.querySelectorAll(".msec");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id.slice(4);tabs.querySelectorAll("a").forEach(function(a){a.classList.toggle("on",a.dataset.sec===id);});}});},{rootMargin:"-160px 0px -60% 0px"});
+    secs.forEach(function(s){io.observe(s);});
+  }
+  tabs.querySelector("a").classList.add("on");
+
+  /* search */
+  $("q").addEventListener("input",function(){
+    var q=this.value.trim().toLowerCase(), any=false;
+    secs.forEach(function(s){var vis=0;s.querySelectorAll(".item").forEach(function(b){var m=!q||b.dataset.search.indexOf(q)>-1;b.hidden=!m;if(m)vis++;});s.hidden=!vis;if(vis)any=true;});
+    nores.hidden=any; if(!any)nores.textContent='Nothing on the menu matches "'+this.value.trim()+'". Try "pie", "cake" or "gluten-free".';
+  });
+
+  /* ---------- pickup or delivery ---------- */
+  function setMode(m){
+    mode=m; try{localStorage.setItem("ll-mode",m);}catch(e){}
+    document.querySelectorAll(".seg button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.mode===m));});
+    $("modeNote").textContent=m==="pickup"?"Pick up at the counter. Ready on the day and time you choose.":"Delivered within 5 miles for $6 (sample), in the time window you choose.";
+    $("pickupBox").hidden=m!=="pickup"; $("deliveryBox").hidden=m!=="delivery";
+    renderCart();
+  }
+  document.querySelectorAll(".seg button").forEach(function(b){b.onclick=function(){setMode(b.dataset.mode);};});
+
+  /* ---------- item sheet ---------- */
+  var dlg=$("itemDlg");
+  function openItem(id){
+    var i=byId[id]; if(!i)return; var qty=1;
+    var opts="";
+    if(i.options){opts='<fieldset class="opts"><legend>'+i.options.label+'</legend>'+i.options.choices.map(function(c,k){return '<label class="opt"><input type="radio" name="opt" value="'+c[0]+'"'+(k===0?" checked":"")+'><span>'+c[1]+'</span><small>'+(c[2]?"+"+money(c[2]):"")+'</small></label>';}).join("")+'</fieldset>';}
+    var msg=i.message?'<div class="field"><label for="cakeMsg">Message on the cake (optional)</label><input id="cakeMsg" maxlength="40" placeholder="Happy birthday, Ana"><span class="hint">Up to 40 characters.</span></div>':'';
+    var tags=i.tags.map(function(t){return '<span class="tag '+t+'">'+LL.TAGTEXT[t]+'</span>';}).join("");
+    dlg.innerHTML='<div class="sheet"><div class="scroll"><div style="position:relative">'+LL.artFrame(i.art,"",i.name,true)+'<button class="x" type="button" data-close aria-label="Close">'+ICON.x+'</button></div>'+
+      '<div class="in"><h2 id="dlgTitle">'+i.name+'</h2><p class="ds">'+i.desc+'</p>'+(tags?'<div class="tags">'+tags+'</div>':'')+opts+msg+
+      '<div class="field"><label for="itemNote">Anything we should know? (optional)</label><textarea id="itemNote" rows="2" placeholder="No nuts on top, please"></textarea></div>'+
+      '<div style="display:flex;align-items:center;gap:12px"><span style="font-weight:700">Quantity</span><span class="stepper"><button type="button" id="qm" aria-label="One fewer">'+ICON.minus+'</button><output id="qv" aria-live="polite">1</output><button type="button" id="qp" aria-label="One more">'+ICON.plus+'</button></span></div>'+
+      '</div></div><div class="foot"><button class="btn btn-cta" type="button" id="addBtn"><span>Add to order</span><span id="addPrice"></span></button></div></div>';
+    var art=dlg.querySelector(".art"); art.style.aspectRatio="16/9";
+    function price(){var o=dlg.querySelector('input[name=opt]:checked'),extra=0;if(o&&i.options)i.options.choices.forEach(function(c){if(c[0]===o.value)extra=c[2];});return (i.price+extra)*qty;}
+    function upd(){$("qv").textContent=qty;$("addPrice").textContent=money(price());}
+    $("qm").onclick=function(){qty=Math.max(1,qty-1);upd();};
+    $("qp").onclick=function(){qty=Math.min(20,qty+1);upd();};
+    dlg.querySelectorAll('input[name=opt]').forEach(function(r){r.onchange=upd;});
+    dlg.querySelectorAll("[data-close]").forEach(function(b){b.onclick=function(){dlg.close();};});
+    $("addBtn").onclick=function(){
+      var o=dlg.querySelector('input[name=opt]:checked'), m=$("cakeMsg"), note=$("itemNote").value.trim();
+      var line={id:i.id,qty:qty,opt:o?o.value:null,msg:m?m.value.trim():"",note:note};
+      var same=cart.find(function(c){return c.id===line.id&&c.opt===line.opt&&c.msg===line.msg&&c.note===line.note;});
+      if(same)same.qty+=qty;else cart.push(line);
+      LL.saveCart(cart); renderCart(); dlg.close(); pulse();
+    };
+    upd(); dlg.showModal(); lockPage();
+  }
+  dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close();});
+  function lockPage(){document.documentElement.classList.toggle("locked",!!document.querySelector("dialog[open]"));}
+  dlg.addEventListener("close",lockPage);
+  function pulse(){var n=$("cartN");n.animate&&n.animate([{transform:"scale(1)"},{transform:"scale(1.35)"},{transform:"scale(1)"}],{duration:300,easing:"ease-out"});}
+
+  /* ---------- cart ---------- */
+  function lineInfo(c){var i=byId[c.id],extra=0,label="";if(i.options&&c.opt)i.options.choices.forEach(function(ch){if(ch[0]===c.opt){extra=ch[2];label=ch[1];}});return {i:i,each:i.price+extra,label:label};}
+  function totals(){var sub=0,n=0;cart.forEach(function(c){var L=lineInfo(c);sub+=L.each*c.qty;n+=c.qty;});var fee=mode==="delivery"&&n?FEE:0;return {sub:sub,fee:fee,total:sub+fee,n:n};}
+  function lead(){var l=3;cart.forEach(function(c){if(byId[c.id].lead)l=Math.max(l,byId[c.id].lead);});return l;}
+  function cartHTML(checkoutBtn){
+    var t=totals();
+    var h='<h2>Your order</h2><p class="mode">'+(mode==="pickup"?"Pickup at the shop":"Delivery within 5 miles")+'</p>';
+    if(!cart.length){return h+'<div class="empty"><b>Your order is empty</b><span>Tap any pie, cake or box to add it.</span></div>';}
+    h+='<div class="clines">'+cart.map(function(c,k){var L=lineInfo(c);var sub=[L.label&&L.label!=="Nothing extra"?L.label:"",c.msg?'Message: "'+esc(c.msg)+'"':"",c.note?"Note: "+esc(c.note):""].filter(Boolean).join(". ");
+      return '<div class="cline"><span class="nm">'+L.i.name+'</span><span class="lp">'+money(L.each*c.qty)+'</span>'+(sub?'<span class="opt">'+sub+'</span>':'')+
+      '<span class="stepper"><button type="button" data-k="'+k+'" data-d="-1" aria-label="'+(c.qty===1?"Remove ":"One fewer ")+L.i.name+'">'+(c.qty===1?ICON.trash:ICON.minus)+'</button><output>'+c.qty+'</output><button type="button" data-k="'+k+'" data-d="1" aria-label="One more '+L.i.name+'">'+ICON.plus+'</button></span></div>';}).join("")+'</div>';
+    h+='<div class="totals"><span>Subtotal</span><span>'+money(t.sub)+'</span>'+(mode==="delivery"?'<span>Delivery (sample)</span><span>'+money(t.fee)+'</span>':'')+'<span class="grand">Total</span><span class="grand">'+money(t.total)+'</span></div>';
+    if(checkoutBtn)h+='<a class="btn btn-cta" href="#checkout">Go to checkout</a>';
+    else h+='<button class="btn btn-cta" type="submit" form="coForm" id="placeBtn">Place order</button><p class="hint">You pay when it arrives. This concept sends nothing.</p>';
+    return h;
+  }
+  function bindSteppers(root){
+    root.querySelectorAll(".stepper button[data-k]").forEach(function(b){b.onclick=function(){var k=+b.dataset.k;cart[k].qty+=+b.dataset.d;if(cart[k].qty<=0)cart.splice(k,1);LL.saveCart(cart);renderCart();};});
+  }
+  function renderCart(){
+    var t=totals();
+    $("cartN").textContent=t.n;
+    $("cartPanel").innerHTML=cartHTML(true); bindSteppers($("cartPanel"));
+    $("cartSheet").innerHTML=cartHTML(true); bindSteppers($("cartSheet"));
+    $("coSummary").innerHTML=cartHTML(false); bindSteppers($("coSummary"));
+    var showBar=t.n>0&&location.hash!=="#checkout"&&location.hash!=="#confirmed";
+    $("viewbar").hidden=!showBar; document.body.classList.toggle("hasbar",showBar);
+    $("viewTotal").textContent=money(t.total); $("viewBtn").firstElementChild.textContent="View your order ("+t.n+")";
+    $("cartSheet").querySelectorAll('a[href="#checkout"]').forEach(function(a){a.onclick=function(){$("cartDlg").close();};});
+    if(location.hash==="#checkout"){buildDays();if(!cart.length)location.hash="#menu";}
+  }
+  var cartDlg=$("cartDlg");
+  function openCart(){if(window.matchMedia("(min-width:1024px)").matches&&location.hash!=="#checkout"&&location.hash!=="#confirmed"){$("cartPanel").scrollIntoView({block:"nearest"});$("cartPanel").focus&&$("cartPanel").setAttribute("tabindex","-1");$("cartPanel").focus();}else{cartDlg.showModal();lockPage();}}
+  $("cartBtn").onclick=openCart; $("viewBtn").onclick=function(){cartDlg.showModal();lockPage();};
+  cartDlg.addEventListener("close",lockPage);
+  cartDlg.querySelector("[data-close]").onclick=function(){cartDlg.close();};
+  cartDlg.addEventListener("click",function(e){if(e.target===cartDlg)cartDlg.close();});
+
+  /* ---------- checkout ---------- */
+  function buildDays(){
+    var days=LL.availableDays(lead()), box=$("days");
+    if(pick.day&&!days.some(function(d){return d.toDateString()===pick.day;}))pick.day=null;
+    box.innerHTML=days.map(function(d){var k=d.toDateString();return '<button type="button" data-day="'+k+'" aria-pressed="'+(pick.day===k)+'">'+d.toLocaleDateString("en-US",{weekday:"short"})+'<small>'+d.toLocaleDateString("en-US",{month:"short",day:"numeric"})+'</small></button>';}).join("");
+    box.querySelectorAll("button").forEach(function(b){b.onclick=function(){pick.day=b.dataset.day;box.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});clearErr($("dayField"));};});
+    $("dayHint").textContent=lead()===7?"Your custom cake needs 7 days' notice, so the first days are left out. Closed Mondays.":"Pies and boxes need 3 days' notice. Closed Mondays. Holiday orders end Dec 24.";
+    var sl=$("slots");
+    sl.innerHTML=SLOTS.map(function(s){return '<button type="button" data-slot="'+s+'" aria-pressed="'+(pick.slot===s)+'">'+s+'</button>';}).join("");
+    sl.querySelectorAll("button").forEach(function(b){b.onclick=function(){pick.slot=b.dataset.slot;sl.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});clearErr($("slotField"));};});
+  }
+  function setErr(field,msg){field.classList.add("bad");var e=field.querySelector(".err");e.textContent=msg;e.hidden=false;}
+  function clearErr(field){field.classList.remove("bad");var e=field.querySelector(".err");if(e)e.hidden=true;}
+  ["street","zip","name","phone","email"].forEach(function(id){$(id).addEventListener("blur",function(){if(this.value.trim())clearErr(this.closest(".field"));});});
+  $("coForm").addEventListener("submit",function(e){
+    e.preventDefault();
+    var errs=[];
+    function need(id,ok,msg){var f=$(id).closest(".field");if(!ok){setErr(f,msg);errs.push([$(id),msg]);}else clearErr(f);}
+    if(mode==="delivery"){need("street",$("street").value.trim().length>4,"Add the street address we should deliver to.");need("zip",/^\d{5}$/.test($("zip").value.trim()),"Add a 5-digit ZIP code.");}
+    if(!pick.day){setErr($("dayField"),"Choose a day.");errs.push([$("days").querySelector("button")||$("days"),"Choose a day."]);}else clearErr($("dayField"));
+    if(!pick.slot){setErr($("slotField"),"Choose a time.");errs.push([$("slots").querySelector("button"),"Choose a time."]);}else clearErr($("slotField"));
+    need("name",$("name").value.trim().length>1,"Add your name so we know whose order it is.");
+    need("phone",$("phone").value.replace(/\D/g,"").length>=10,"Add a 10-digit phone number in case we need to reach you.");
+    need("email",/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($("email").value.trim()),"Add an email address for your confirmation.");
+    var sum=$("errSum");
+    if(errs.length){sum.textContent=errs.length===1?"One thing to fix before placing your order.":errs.length+" things to fix before placing your order.";sum.hidden=false;errs[0][0].focus();return;}
+    sum.hidden=true;
+    var btn=$("placeBtn"); btn.disabled=true; btn.innerHTML='<span class="spinner" aria-hidden="true"></span>Placing order';
+    setTimeout(function(){confirmOrder();},900);
+  });
+  function confirmOrder(){
+    var t=totals(), day=new Date(pick.day), when=day.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"})+", "+pick.slot;
+    var items=cart.map(function(c){var L=lineInfo(c);return c.qty+" × "+L.i.name;}).join("<br>");
+    var num="LL-"+(1000+Math.floor(Math.random()*9000));
+    $("doneCard").innerHTML='<h2>'+(mode==="pickup"?"Pickup":"Delivery")+' on '+when+'</h2><p class="hint">Sample order number '+num+'</p><p>'+items+'</p><div class="totals"><span class="grand">Total, paid when it arrives</span><span class="grand">'+money(t.total)+'</span></div>'+
+      '<ol class="track"><li class="now"><span class="dot">✓</span><div><b>Order received</b><span>Just now</span></div></li><li><span class="dot">2</span><div><b>Baking</b><span>The morning of '+day.toLocaleDateString("en-US",{month:"short",day:"numeric"})+'</span></div></li><li><span class="dot">3</span><div><b>Boxed</b><span>Warm, with your name on it</span></div></li><li><span class="dot">4</span><div><b>'+(mode==="pickup"?"Ready at the counter":"Out for delivery")+'</b><span>'+pick.slot+'</span></div></li></ol>';
+    cart=[]; LL.saveCart(cart); pick={day:null,slot:null};
+    location.hash="#confirmed";
+  }
+
+  /* ---------- views follow the address bar, so Back works ---------- */
+  function route(){
+    var h=location.hash;
+    var co=h==="#checkout"&&cart.length, done=h==="#confirmed"&&$("doneCard").innerHTML;
+    $("menuView").hidden=!!(co||done); $("checkout").hidden=!co; $("confirmed").hidden=!done;
+    if(co){buildDays();window.scrollTo(0,0);$("coTitle").focus({preventScroll:true});}
+    else if(done){window.scrollTo(0,0);$("doneTitle").focus({preventScroll:true});}
+    else if(h==="#checkout"||h==="#confirmed"){history.replaceState(null,"",location.pathname+location.search);}
+    renderCart();
+  }
+  window.addEventListener("hashchange",route);
+
+  setMode(mode); route();
+  var want=new URLSearchParams(location.search).get("item");
+  if(want&&byId[want]){var el=document.querySelector('.item[data-id="'+want+'"]');if(el)el.scrollIntoView({block:"center"});openItem(want);}
+})();
+</script>
+</body>
+</html>
