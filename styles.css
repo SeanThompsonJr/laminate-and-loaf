@@ -124,3 +124,16 @@ footer a{color:var(--butter)}
   .status{font-size:.8rem}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* the "this is a concept site" notice for phone links, and no page scroll behind any open dialog */
+html.locked,html:has(dialog[open]){overflow:hidden}
+.notice{border:0;padding:0;border-radius:var(--r-lg);width:min(440px,calc(100% - 32px));background:var(--paper);color:var(--ink);box-shadow:0 20px 60px rgba(20,50,58,.35)}
+.notice::backdrop{background:rgba(20,50,58,.5)}
+.notice[open]{animation:noticeIn .22s var(--ease-out)}
+@keyframes noticeIn{from{opacity:0;transform:translateY(10px) scale(.98)}}
+.notice-in{padding:28px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.notice-icon{width:48px;height:48px;border-radius:50%;background:var(--butter);color:var(--ink);display:grid;place-items:center}
+.notice-icon svg{width:22px;height:22px}
+.notice h2{font-size:1.5rem}
+.notice p{color:var(--ink-soft)}
+.notice .btn{margin-top:8px;align-self:stretch}

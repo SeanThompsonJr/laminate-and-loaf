@@ -60,5 +60,30 @@
     st.querySelector("span").textContent=label;
   }
 
-  window.LL={MENU:MENU,TAGTEXT:TAGTEXT,byId:byId,art:art,artFrame:artFrame,loadCart:loadCart,saveCart:saveCart,availableDays:availableDays,setStatus:setStatus};
+
+  /* ---------- phone links: a concept site must not place a real call ---------- */
+  var notice=null;
+  function callNotice(){
+    if(!notice){
+      notice=document.createElement("dialog"); notice.className="notice"; notice.setAttribute("aria-labelledby","noticeTitle");
+      notice.innerHTML='<div class="notice-in"><span class="notice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></span>'+
+        '<h2 id="noticeTitle">This is a concept site</h2>'+
+        '<p>Laminate &amp; Loaf is a made-up bakery, so no call was made. Its number, <span style="white-space:nowrap">(904) 555-0142</span>, is a sample.</p>'+
+        '<p>On a real site, this button would call the shop.</p>'+
+        '<button class="btn btn-cta" type="button" data-close>Got it</button></div>';
+      document.body.appendChild(notice);
+      notice.querySelector("[data-close]").onclick=function(){notice.close();};
+      notice.addEventListener("click",function(e){if(e.target===notice)notice.close();});
+      notice.addEventListener("close",function(){document.documentElement.classList.toggle("locked",!!document.querySelector("dialog[open]"));});
+    }
+    notice.showModal(); document.documentElement.classList.add("locked");
+    notice.querySelector("[data-close]").focus();
+  }
+  document.addEventListener("click",function(e){
+    var t=e.target.closest('a[href^="tel:"],[data-call]');
+    if(!t)return;
+    e.preventDefault(); callNotice();
+  });
+
+  window.LL={MENU:MENU,TAGTEXT:TAGTEXT,byId:byId,art:art,artFrame:artFrame,loadCart:loadCart,saveCart:saveCart,availableDays:availableDays,setStatus:setStatus,callNotice:callNotice};
 })();

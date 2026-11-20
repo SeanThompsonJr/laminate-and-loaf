@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261120g">
+<link rel="stylesheet" href="styles.css?v=20261120k">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%23F5C842%27/%3E%3Ctext x=%2716%27 y=%2721%27 font-size=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 fill=%27%2314323A%27%3EL%26amp;L%3C/text%3E%3C/svg%3E">
 <style>
 /* ---------- hero ---------- */
@@ -216,7 +216,7 @@ details p{padding:0 0 18px;color:var(--ink-soft)}
       <div class="contact">
         <span class="hint">Call the shop</span>
         <a class="big" href="tel:+19045550142">(904) 555-0142</a>
-        <span class="hint">555 numbers are reserved for examples; this one isn't real.</span>
+        <span class="hint">A sample number. Tapping it shows a note instead of calling.</span>
       </div>
     </div>
     <div class="art mapbox" id="map" role="img" aria-label="Concept map showing the shop's sample location next to a park and a river">
@@ -261,7 +261,7 @@ details p{padding:0 0 18px;color:var(--ink-soft)}
         <span>Sample address, Jacksonville, FL</span>
         <div class="acts">
           <button type="button" class="primary" data-msg="On the real site, this opens turn-by-turn directions."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.7 11.3l-9-9a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5z"/></svg>Directions</button>
-          <button type="button" data-msg="On the real site, this calls the shop."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call</button>
+          <button type="button" data-call><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call</button>
         </div>
       </div>
       <div class="zoom"><button type="button" id="zin" aria-label="Zoom in">+</button><button type="button" id="zout" aria-label="Zoom out">−</button></div>
@@ -287,10 +287,10 @@ details p{padding:0 0 18px;color:var(--ink-soft)}
   <a class="btn btn-cta" href="order.html">Order online</a>
 </div>
 
-<script src="shared.js?v=20261120g"></script>
-<script src="hairline/kernel.js?v=20261120g"></script>
-<script src="hairline/host.js?v=20261120g"></script>
-<script src="hairline/figures.js?v=20261120g"></script>
+<script src="shared.js?v=20261120k"></script>
+<script src="hairline/kernel.js?v=20261120k"></script>
+<script src="hairline/host.js?v=20261120k"></script>
+<script src="hairline/figures.js?v=20261120k"></script>
 <script>LLHairline.mountAll();</script>
 <script>
 (function(){
@@ -319,7 +319,7 @@ details p{padding:0 0 18px;color:var(--ink-soft)}
   function zoom(d){z=Math.min(2,Math.max(1,z+d)); msvg.style.transform="scale("+z+")";}
   document.getElementById("zin").onclick=function(){zoom(.25);};
   document.getElementById("zout").onclick=function(){zoom(-.25);};
-  document.querySelectorAll(".place button").forEach(function(b){b.onclick=function(){toast.textContent="Concept: "+b.getAttribute("data-msg");toast.hidden=false;clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true;},3500);};});
+  document.querySelectorAll(".place button[data-msg]").forEach(function(b){b.onclick=function(){toast.textContent="Concept: "+b.getAttribute("data-msg");toast.hidden=false;clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true;},3500);};});
 
 })();
 </script>
